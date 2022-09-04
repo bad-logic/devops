@@ -1,13 +1,12 @@
 apiVersion: skaffold/v2beta29
 kind: Config
-deploy:
-  kubectl:
-    manifests:
-      - ./deploy.yml
-      - ./service.yml
+metadata:
+  name: node-proxy-setup
 build:
   local:
     push: false
+    useBuildkit: true
+    useDockerCLI: true
   artifacts:
     - image: internal-app-image
       context: internal-app
@@ -25,3 +24,8 @@ build:
         manual:
           - src: .
             dest: .
+deploy:
+  kubectl:
+    manifests:
+      - ./deploy.yml
+      - ./service.yml
