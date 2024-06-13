@@ -1,0 +1,11 @@
+# Container lifecycle
+
+1. CREATE
+2. RUNNING
+3. PAUSE
+4. UNPAUSE
+5. START
+6. RESTART
+7. KILL
+8. DESTROY
+9. EXITED
