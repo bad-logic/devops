@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  node-api-service:
+    container_name: node-api-container
+    image: node-api-image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - node-redis-nw
+    volumes:
+      - ./:/app
+    environment:
+      - PORT=3000
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis-service
+    depends_on:
+      - redis-service
+
+  nginx-service:
+    container_name: node-nginx-container
+    image: node-nginx-image
+    build:
+      context: ./nginx-compose
+      dockerfile: Dockerfile
+    networks:
+      - node-redis-nw
+    ports:
+      - 8080:80
+    depends_on:
+      - node-api-service
+
+  redis-service:
+    container_name: redis-container
+    image: redis
+    networks:
+      - node-redis-nw
+    ports:
+      - 6379:6379
+
+networks:
+  node-redis-nw:
