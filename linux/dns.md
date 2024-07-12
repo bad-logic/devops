@@ -8,7 +8,7 @@
     .com            .org         .net   | top level domain
 
 
-    .diagonal                           | second level domain
+    .xyz                           | second level domain
 
 
     .www                                | sub domain
@@ -34,10 +34,10 @@ PTR Record
 NS
 
 tools : dig
-dig diagonal.solutions NS
-dig diagonal.solutions TXT
-dig diagonal.solutions MX
-dig +short diagonal.solution => check only ip
+dig xyz.com NS
+dig xyz.com TXT
+dig xyz.com MX
+dig +short xyz.solution => check only ip
 
 check if dns resolved
 

@@ -57,7 +57,7 @@ echo "apple" | tr [:lower:] [:upper:] => lower to upper case tr-> transpose
 
 payload.json
 {
-"email":"admin@diagonal.software",
+"email":"admin@admin.com",
 "password":"Password@123",
 "role_group":"master"
 }

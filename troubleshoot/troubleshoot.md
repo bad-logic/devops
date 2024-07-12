@@ -21,8 +21,8 @@ MX => mail
 TXT => textual values for spf , dns challenges
 CNAME => aliasing name
 
-`diagonal.software A 1.2.3.4`
-`www.diagonal.software CNAME diagonal.solution`
+`xyz.com A 1.2.3.4`
+`www.xyz.com CNAME xyz.com`
 
 network tools:
 ping google.com
