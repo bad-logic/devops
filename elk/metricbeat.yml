@@ -1,0 +1,20 @@
+metricbeat.modules:
+  - module: docker
+    metricsets:
+      - 'container'
+      - 'cpu'
+      - 'diskio'
+      - 'event'
+      - 'healthcheck'
+      - 'info'
+      - 'image'
+      - 'memory'
+      - 'network'
+    hosts: ['unix:///var/run/docker.sock']
+    period: 10s
+    enabled: true
+    processes: ['.*']
+    cpu.metrics: ['percentages', 'normalized_percentages']
+
+output.logstash:
+  hosts: ['logstash:5044']

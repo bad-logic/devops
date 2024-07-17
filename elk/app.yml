@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+  elk_organization:
+    external: true
+
+services:
+  demo_server:
+    build:
+      context: ./springboot-server
+      target: deployment
+    image: spring_demo:v1.0.0
+    container_name: demo-server-container
+    environment:
+      - APP_NAME=demo
+      - APP_PORT=8080
+      # - LOG_PATTERN='%d{yyyy-MM-dd HH:mm:ss} -%logger -%msg%n'
+      - LOG_FILE_NAME=/var/logs/spring/app.log
+      - LOG_LEVEL=debug
+      - FRAMEWORK_LOG_LEVEL=error
+      - LOG_FILE_SIZE=5MB
+      - LOG_FILE_MAX_HISTORY=3
+    ports:
+      - 8080:8080
+    volumes:
+      - ./logs/:/var/logs/spring/:rw
