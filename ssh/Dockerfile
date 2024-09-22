@@ -1,10 +1,10 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
-RUN apt update
-
-RUN apt install openssh-server -y
-
-RUN service ssh start
+RUN apt update \
+    && apt install openssh-server -y \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* \
+    && service ssh start
 
 EXPOSE 22
 

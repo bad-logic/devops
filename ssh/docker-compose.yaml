@@ -1,0 +1,24 @@
+networks:
+  ssh_network:
+
+services:
+  ssh-server:
+    container_name: ssh-server-container
+    image: ssh-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - ssh_network
+    ports:
+      - 2022:22
+
+  ssh-client:
+    container_name: ssh-client-container
+    image: ssh-client
+    stdin_open: true # Keep stdin open
+    build:
+      context: .
+      dockerfile: ClientDockerfile
+    networks:
+      - ssh_network
