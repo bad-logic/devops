@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  pg_practise_data:
+
+services:
+  postgres-database:
+    image: postgres
+    container_name: postgres-container
+    environment:
+      POSTGRES_DB: practise
+      POSTGRES_PASSWORD: practise
+      POSTGRES_USER: practise
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_practise_data:/var/lib/postgresql/data
