@@ -1,0 +1,8 @@
+scrape-configs:
+  - job-name: 'express-profile'
+    scrape_interval: 10s
+    enabled-profiles: [cpu, mem]
+    static_configs:
+      targets: ['express_service:3000']
+      labels:
+        app_name: 'express-node-app'
