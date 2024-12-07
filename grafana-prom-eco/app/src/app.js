@@ -4,6 +4,7 @@ import { collectDefaultMetrics, Registry, Counter, Gauge } from 'prom-client';
 import Pyroscope from '@pyroscope/nodejs';
 import contextManagerMiddleware from './utils/contextManager.js';
 import welcomeController from './controller/welcome.controller.js';
+import { gracefulShutdown } from './shutdown.js';
 
 // for profiling
 Pyroscope.init({
@@ -92,4 +93,31 @@ const server = http.createServer(app);
 const PORT = parseInt(process.env['PORT']) || 8080;
 server.listen(PORT, () => {
   console.info(`Express server running on port: ${PORT} `);
+});
+
+const shutdownHandler = gracefulShutdown(server);
+
+// handling kill commands
+process.on('SIGTERM', () => {
+  // user presses ctrl + C
+  console.error('user presses ctrl + c');
+  shutdownHandler(0);
+});
+
+process.on('SIGINT', () => {
+  // user presses ctrl + D
+  console.error('user presses ctrl + d');
+  shutdownHandler(0);
+});
+
+// prevent promise rejection exits
+process.on('unhandledRejection', (reason, _promise) => {
+  console.log('unhandledRejection', reason, _promise);
+  shutdownHandler(1);
+});
+
+// prevent dirty exit on code-fault crashes
+process.on('uncaughtException', (error) => {
+  console.error(`Application Crashed  ${error?.stack?.split('\n')}`);
+  shutdownHandler(1);
 });
