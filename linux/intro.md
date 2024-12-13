@@ -5,7 +5,7 @@ $ groupmod -n <newnanem> <oldname>
 $ gpasswd -a <user1> <group> // adding user to a group
 $ gpasswd -A <user1> <group> // add user to group and make the user admin of that group
 $ gpasswd -d <user1> <group> // removing user from a group
-$ usermod -a -G <group1>,<group2> <user>
+$ usermod -a -G <group1>,<group2> <user> // add user to groups group1 and group2
 $ newgrp <groupName> // temporarily changing group context, newGroup will be the primary group
 ```
 
