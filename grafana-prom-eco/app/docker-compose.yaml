@@ -1,7 +1,7 @@
 volumes:
   prometheus-data:
   grafana-data:
-  pyroscope-data:
+#  pyroscope-data:
 
 services:
   express_service:
@@ -20,19 +20,19 @@ services:
     volumes:
       - ./src:/home/usr/src:ro
 
-  pyroscope:
-    container_name: grafana-pyroscope
-    image: grafana/pyroscope
-    ports:
-      - 4040:4040
-    environment:
-      - PYROSCOPE_CONFIG=/etc/pyroscope/config.yml
-      - PYROSCOPE_LOG_LEVEL=debug # Log level set as environment variable
-      - PYROSCOPE_STORAGE_PATH=/var/lib/pyroscope # Storage path as environment variable
-      - PYROSCOPE_STORAGE_RETENTION=7d # Retention as environment variable
-    volumes:
-      - ./pyroscope.yml:/etc/pyroscope/config.yml:ro
-      - pyroscope-data:/var/lib/pyroscope:rw
+#  pyroscope:
+#    container_name: grafana-pyroscope
+#    image: grafana/pyroscope
+#    ports:
+#      - 4040:4040
+#    environment:
+#      - PYROSCOPE_CONFIG=/etc/pyroscope/config.yml
+#      - PYROSCOPE_LOG_LEVEL=debug # Log level set as environment variable
+#      - PYROSCOPE_STORAGE_PATH=/var/lib/pyroscope # Storage path as environment variable
+#      - PYROSCOPE_STORAGE_RETENTION=7d # Retention as environment variable
+#    volumes:
+#      - ./pyroscope.yml:/etc/pyroscope/config.yml:ro
+#      - pyroscope-data:/var/lib/pyroscope:rw
 
   prometheus:
     container_name: prometheus-server

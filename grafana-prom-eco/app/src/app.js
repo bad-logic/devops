@@ -1,17 +1,10 @@
 import http from 'node:http';
 import Express from 'express';
 import { collectDefaultMetrics, Registry, Counter, Gauge } from 'prom-client';
-import Pyroscope from '@pyroscope/nodejs';
+// import Pyroscope from '@pyroscope/nodejs';
 import contextManagerMiddleware from './utils/contextManager.js';
 import welcomeController from './controller/welcome.controller.js';
 import { gracefulShutdown } from './shutdown.js';
-
-// for profiling
-Pyroscope.init({
-  appName: 'node-express-demo',
-});
-
-Pyroscope.start();
 
 // for AMP metrics
 const register = new Registry();
@@ -40,6 +33,13 @@ const app = new Express();
 // req.headers['x-forwarded-for'] list of ip addresses of the proxies in between client and server. rightmost is the recent ip address
 // and leftmost is the ip address of the originating client
 
+
+// for profiling
+// Pyroscope.init({
+//   appName: 'node-express-demo',
+// });
+// Pyroscope.start();
+
 app.use((req, res, next) => {
   res.on('finish', () => {
     httpRequestCounter.inc({
@@ -63,12 +63,11 @@ app.get('/metrics', async (req, res, next) => {
   }
 });
 
-app.use(Pyroscope.expressMiddleware());
-
+// app.use(Pyroscope.expressMiddleware());
 // app.get('/debug/pprof/profile', async (req, res, next) => {
 //   try {
 //     const wallHandler = profileExpressHandler('Wall', (req) => collectWall(1000 * Number(req.query.seconds)));
-
+//
 //     res.send(await Pyroscope.collectCpu(req.query.seconds));
 //   } catch (err) {
 //     console.log({ err });
@@ -79,7 +78,7 @@ app.use(Pyroscope.expressMiddleware());
 //   try {
 //     const heapHandler = profileExpressHandler('Heap', () => collectHeap());
 //     res.send(await Pyroscope.collectCpu(req.query.seconds));
-
+//
 //   } catch (err) {
 //     console.log({ err });
 //     res.status(500).send();
