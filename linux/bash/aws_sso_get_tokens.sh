@@ -30,7 +30,7 @@ create_session(){
 
   ACCESS_TOKEN=$(jq -r '.accessToken' ~/.aws/sso/cache/$(ls ~/.aws/sso/cache | head -n 1))
 
-  TOKENS=$(aws sso get-role-credentials --account-id $ACCOUNT_ID --role-name $ROLE_NAME --access-token $ACCESS_TOKEN --query 'roleCredentials.[accessKeyId,secretAccessKey,sessionToken]' --output text --profile $PROFILE)
+  TOKENS=$(aws sso get-role-credentials --account-id $ACCOUNT_ID --role-name $ROLE_NAME --profile $PROFILE --access-token $ACCESS_TOKEN --query 'roleCredentials.[accessKeyId,secretAccessKey,sessionToken]' --output text)
 
   # Check if the operation was successful
   if [ $? -ne 0 ]; then
