@@ -1,7 +1,0 @@
-[Unit]
-Description=Linux Session express servive
-
-[Service]
-User=bad-logic
-ExecStart=/home/bad-logic/.nvm/versions/node/v16.14.0/bin/node  /home/roshan/myapp/index.js
-Restart=always
