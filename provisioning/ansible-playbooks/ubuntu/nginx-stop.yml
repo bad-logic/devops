@@ -1,0 +1,13 @@
+# stop nginx ubuntu system locally
+# ansible-playbook nginx.yml
+
+- name: stop nginx
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: Stop Nginx
+      service:
+        name: nginx
+        state: stopped
