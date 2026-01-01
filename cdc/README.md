@@ -53,3 +53,4 @@
     $ curl -X DELETE http://localhost:8083/connectors/<conn_name>
     ```
 
+8. once setup make a change on the table, you will be able to see the db changes event inside kafka topics
