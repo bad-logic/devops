@@ -1,13 +1,13 @@
 ## TOOLS
 
-- [Docker](./docker/)
-- Kubernetes
+- [Docker](./docker)
+- [Kubernetes](./k8s)
 - [Tools Setup](./tools)
   - [jenkins](./tools/jenkins)
   - [kafka](./tools/kafka)
   - [opensearch](./tools/opensearch)
-  - [LogMiner based oracle cdc with debezium and kafka](./tools/oracledb/enable_cdc.md)
-- Resource Provisioning
+  - [docker o11y](./tools/docker o11y)
+- [Resource Provisioning on localstack with terraform](./provisioning/terraform/aws-localstack)
 -  Monitoring Tools Setup
     - [elk](./elk)
     - [grafana-prometheus](./grafana-prom-eco)
